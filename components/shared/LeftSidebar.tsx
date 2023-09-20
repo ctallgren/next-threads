@@ -1,14 +1,16 @@
 "use client";
 
-import { sidebarLinks } from "@/constants";
-import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 
-function LefSidebar() {
+import { sidebarLinks } from "@/constants";
+
+const LeftSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
+
   const { userId } = useAuth();
 
   return (
@@ -25,7 +27,7 @@ function LefSidebar() {
             <Link
               href={link.route}
               key={link.label}
-              className={`leftsidebar_link ${isActive && "bg-primary-500"}`}
+              className={`leftsidebar_link ${isActive && "bg-primary-500 "}`}
             >
               <Image
                 src={link.imgURL}
@@ -39,6 +41,7 @@ function LefSidebar() {
           );
         })}
       </div>
+
       <div className="mt-10 px-6">
         <SignedIn>
           <SignOutButton signOutCallback={() => router.push("/sign-in")}>
@@ -57,6 +60,6 @@ function LefSidebar() {
       </div>
     </section>
   );
-}
+};
 
-export default LefSidebar;
+export default LeftSidebar;
